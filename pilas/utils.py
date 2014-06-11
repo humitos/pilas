@@ -120,7 +120,10 @@ def colisionan(a, b):
     :param a: Un actor.
     :param b: El segundo actor a verificar.
     """
-    return distancia_entre_dos_actores(a, b) < a.radio_de_colision + b.radio_de_colision
+    if a.tiene_area_rectangular() and b.tiene_area_rectangular():
+        return a.colision_entre_rectangulos(b)
+    else:
+        return distancia_entre_dos_actores(a, b) < a.radio_de_colision + b.radio_de_colision
 
 
 def interpolable(f):

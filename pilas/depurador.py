@@ -281,8 +281,13 @@ class ModoRadiosDeColision(ModoDepurador):
 
     def dibuja_al_actor(self, motor, painter, lienzo, actor):
         x, y = self._obtener_posicion_relativa_a_camara(actor)
-        lienzo.circulo(painter, x, y, actor.radio_de_colision, color=pilas.colores.negro, grosor=ModoDepurador.grosor_de_lineas+2)
-        lienzo.circulo(painter, x, y, actor.radio_de_colision, color=pilas.colores.blanco, grosor=ModoDepurador.grosor_de_lineas)
+        if actor.tiene_area_rectangular():
+            _x, _y, w, h = actor.area_colision_rectangular
+            lienzo.rectangulo(painter, x - _x, y - _y, w, h, color=pilas.colores.negro, grosor=ModoDepurador.grosor_de_lineas+2)
+            lienzo.rectangulo(painter, x - _x, y - _y, w, h, color=pilas.colores.blanco, grosor=ModoDepurador.grosor_de_lineas)
+        else:
+            lienzo.circulo(painter, x, y, actor.radio_de_colision, color=pilas.colores.negro, grosor=ModoDepurador.grosor_de_lineas+2)
+            lienzo.circulo(painter, x, y, actor.radio_de_colision, color=pilas.colores.blanco, grosor=ModoDepurador.grosor_de_lineas)
 
 
 class ModoArea(ModoDepurador):

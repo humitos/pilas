@@ -713,3 +713,27 @@ class Actor(object, Estudiante):
 
         :return: boolean"""
         return False
+
+    def tiene_area_rectangular(self):
+        return getattr(self, 'area_colision_rectangular', False)
+
+    def definir_area_colision(self, x, y, ancho, alto):
+        self.area_colision_rectangular = (x, y, ancho, alto)
+
+    def colision_entre_rectangulos(self, otro_actor):
+        def valor_en_rango(valor, _min, _max):
+            return (valor >= _min) and (valor <= _max)
+
+        x0, y0, w0, h0 = self.area_colision_rectangular
+        x1, y1, w1, h1 = otro_actor.area_colision_rectangular
+
+        x0 = self.x - x0
+        y0 = self.y - y0
+
+        x1 = otro_actor.x - x1
+        y1 = otro_actor.y - y1
+
+        x_overlap = valor_en_rango(x0, x1, x1 + w1) or valor_en_rango(x1, x0, x0 + w0)
+        y_overlap = valor_en_rango(y0, y1, y1 + h1) or valor_en_rango(y1, y0, y0 + h0)
+
+        return (x_overlap and y_overlap)
