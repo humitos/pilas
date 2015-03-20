@@ -116,7 +116,7 @@ class Tareas(object):
         self.tareas_planificadas.append(tarea)
 
     def una_vez(self, tiempo, function, params=[]):
-        """Genera una tarea que se ejecutará usan sola vez.
+        """Genera una tarea que se ejecutará una sola vez.
 
         :param tiempo: Cantidad se segundos que deben transcurrir para ejecutar la tarea.
         :param function: Función a ejecutar para lanzar la tarea.
